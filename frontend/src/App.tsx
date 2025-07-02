@@ -14,7 +14,6 @@ function App() {
     fetch("http://localhost:3001/listar")
       .then((res) => res.json())
       .then((data) => {
-        // O backend retorna { message, tarefas }
         setTasks(
           data.tarefas.map((t: any) => ({
             id: t.id,
