@@ -1,39 +1,54 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
-
-type Task = {
-  id: number;
-  title: string;
-  completed: boolean;
-};
+import {
+  Task,
+  fetchTasks,
+  createTask,
+  updateTaskStatus,
+  deleteTaskById,
+} from "./services/taskService";
+import TaskForm from "./componentes/TaskForm";
+import TaskList from "./componentes/TaskList";
 
 function App() {
   const [tasks, setTasks] = useState<Task[]>([]);
+  const [newTask, setNewTask] = useState("");
+
+  const loadTasks = () => {
+    fetchTasks().then(setTasks);
+  };
 
   useEffect(() => {
-    fetch("http://localhost:3001/listar")
-      .then((res) => res.json())
-      .then((data) => {
-        setTasks(
-          data.tarefas.map((t: any) => ({
-            id: t.id,
-            title: t.titulo,
-            completed: t.concluida,
-          }))
-        );
-      });
+    loadTasks();
   }, []);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newTask.trim()) return;
+    await createTask(newTask);
+    setNewTask("");
+    loadTasks();
+  };
+
+  const toggleTask = async (task: Task) => {
+    await updateTaskStatus(task.id, !task.completed);
+    loadTasks();
+  };
+
+  const handleDelete = async (id: number) => {
+    await deleteTaskById(id);
+    loadTasks();
+  };
 
   return (
     <div className="App">
       <h1>Task To Do</h1>
-      <ul>
-        {tasks.map((task) => (
-          <li key={task.id}>
-            {task.title} {task.completed ? "✅" : ""}
-          </li>
-        ))}
-      </ul>
+      <TaskForm
+        newTask={newTask}
+        setNewTask={setNewTask}
+        onSubmit={handleSubmit}
+      />
+      <TaskList tasks={tasks} onToggle={toggleTask} onDelete={handleDelete} />
     </div>
   );
 }

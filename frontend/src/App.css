@@ -1,5 +1,16 @@
+body {
+  background: #f4f6fa;
+  margin: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
 .App {
-  text-align: center;
+  background: #fff;
+  max-width: 400px;
+  margin: 40px auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  padding: 32px 24px 24px 24px;
 }
 
 .App-logo {
@@ -35,4 +46,95 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+h1 {
+  margin-bottom: 24px;
+  font-size: 2rem;
+  color: #333;
+}
+
+form {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+input[type="text"] {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 1rem;
+  background: #f9fafb;
+  transition: border 0.2s;
+}
+input[type="text"]:focus {
+  border: 1.5px solid #61dafb;
+  outline: none;
+}
+
+button[type="submit"],
+.delete-btn {
+  background: #61dafb;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+button[type="submit"]:hover,
+.delete-btn:hover {
+  background: #21a1f3;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.task-item {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: box-shadow 0.2s, border 0.2s;
+}
+.task-item:hover {
+  box-shadow: 0 2px 8px rgba(97, 218, 251, 0.08);
+  border: 1.5px solid #61dafb;
+}
+
+.task-item.completed {
+  text-decoration: line-through;
+  color: #a1a1aa;
+  background: #e0e7ef;
+}
+
+.task-title {
+  flex: 1;
+  font-size: 1rem;
+}
+
+.delete-btn {
+  margin-left: 8px;
+  background: #ef4444;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.delete-btn:hover {
+  background: #b91c1c;
 }
